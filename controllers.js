@@ -93,9 +93,10 @@ exports.getObjects=function(req,res) {
 // }
 
 exports.downloadSample=function(req,res) {
-	console.log(req.body);
-	const file=fs.createReadStream(`./samples/sample-${req.body.object}.csv`); 
+	// console.log(req.body);
+	// const file=fs.createReadStream(`./samples/sample-${req.body.object}.csv`); 
 	
-	res.pipe(file);
+	// res.pipe(file);
+	res.send("working");
 }
 
