@@ -63,40 +63,16 @@ exports.deleteData=function(req,res) {
 // 	res.send({actions});
 // }
 
-exports.getObjects=function(req,res) {
-	let objects=[];
-	// if(req.body.application==="p247") {
-		objects=[
-			'searches',
-			'tags',
-			'maps',
-			'leads',
-			'authority',
-			'flat-authority',
-			'fieldPermissions',
-			'properties',
-			'masterManagement',
-			'aparmtentsAuthority',
-			'sectorMaps',
-			'flat-leads',
-			'users',
-			'flats',
-			'leads2'
-		]
-	// }
-
-	res.json({objects});
-}
 
 // exports.setCollection = function(req,res){
 // 	const collection = model.collection(req.body.collection);
 // }
 
-exports.downloadSample=function(req,res) {
-	// console.log(req.body);
-	// const file=fs.createReadStream(`./samples/sample-${req.body.object}.csv`); 
+// exports.downloadSample=function(req,res) {
+// 	// console.log(req.body);
+// 	// const file=fs.createReadStream(`./samples/sample-${req.body.object}.csv`); 
 	
-	// res.pipe(file);
-	res.send("working");
-}
+// 	// res.pipe(file);
+// 	res.send("working");
+// }
 

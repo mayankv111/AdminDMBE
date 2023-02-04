@@ -38,28 +38,6 @@ async function updatePropertyAuth(propid, oname, mobile) {
 		console.log(res1);
 	}
 	else {
-		// if(res.ownerName !== "" && res.phoneNumber === "")
-		// {
-		// 	await collection2.updateOne(
-		// 		{propertyID: ObjectId(propid)},
-		// 		{
-		// 			$set : {
-		// 				ownerName : oname
-		// 			}
-		// 		}
-		// 	)
-		// }
-		// else if(res.ownerName === "" && res.phoneNumber !== "")
-		// {
-		// 	await collection2.updateOne(
-		// 		{propertyID: ObjectId(propid)},
-		// 		{
-		// 			$set : {
-		// 				phoneNumber : mobile
-		// 			}
-		// 		}
-		// 	)
-		// }
 		if(res.ownerName !== "" || res.phoneNumber !== "")
 		{
 			await collection2.updateOne(
@@ -72,58 +50,6 @@ async function updatePropertyAuth(propid, oname, mobile) {
 		}
 	}
 }
-
-// async function updatePropertyMaps(propid, oname, mobile) {
-// 	let res = await collection2.findOne({propertyID: ObjectId(propid)});
-// 	if(res === null)
-// 	{
-// 		let res1 =await collection2.insertOne({
-// 			ownerName : oname , 
-// 			owenerFather : null,
-// 			address : "",
-// 			phoneNumber : mobile , 
-// 			propertyID: ObjectId(propid), 
-// 			});
-// 		console.log(res1);
-// 	}
-// 	else {
-// 		console.log(res);
-// 		if(res.ownerName !== "" && res.phoneNumber === "")
-// 		{
-// 			await collection2.updateOne(
-// 				{propertyID: ObjectId(propid)},
-// 				{
-// 					$set : {
-// 						ownerName : oname
-// 					}
-// 				}
-// 			)
-// 		}
-// 		else if(res.ownerName === "" && res.phoneNumber !== "")
-// 		{
-// 			await collection2.updateOne(
-// 				{propertyID: ObjectId(propid)},
-// 				{
-// 					$set : {
-// 						phoneNumber : mobile
-// 					}
-// 				}
-// 			)
-// 		}
-// 		else
-// 		{
-// 			await collection2.updateOne(
-// 			{propertyID: ObjectId(propid)},
-// 			{ $set :{
-// 				ownerName : oname , 
-// 				phoneNumber : mobile ,  
-// 				}
-// 			});
-// 		}
-// 	}
-// 	val++;
-// 	console.log(val);
-// }
 
 async function test(filename) {
 	fs.createReadStream(`./uploads/${filename}`).pipe(csv()).on("data",async function(row) {
