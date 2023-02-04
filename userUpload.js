@@ -4,7 +4,7 @@ const csv=require("csv-parser")
 // const bcrypt = require("bcryptjs");
 const fs=require("fs");
 
-const client=new MongoClient(process.env.MONGO_URI);
+const client=new MongoClient(process.env.P247_URI);
 const model=client.db("model");
 
 const collection=model.collection("users");
