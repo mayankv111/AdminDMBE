@@ -22,11 +22,11 @@ const fileStorageEngine=multer.diskStorage({
 
 const upload=multer({storage: fileStorageEngine});
 
-app.post("/add-data",upload.single('file'),controllers.addData);
-app.put("/update-data",upload.single('file'),controllers.updateData);
-app.delete("/delete-data",upload.single('file'),controllers.deleteData);
-app.put("/update-properties",upload.single('file'),propController.updateProp)
-app.post("/upload-users",upload.single('file'),userUploader.uploadUsers);
+app.post("/api/add-data",upload.single('file'),controllers.addData);
+app.put("/api/update-data",upload.single('file'),controllers.updateData);
+app.delete("/api/delete-data",upload.single('file'),controllers.deleteData);
+app.put("/api/update-properties",upload.single('file'),propController.updateProp)
+app.post("/api/upload-users",upload.single('file'),userUploader.uploadUsers);
 
 // app.get("/download-sample",controllers.downloadSample );
 
