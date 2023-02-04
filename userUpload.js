@@ -68,6 +68,6 @@ async function test(filename) {
 // if(result===null) console.log(email.toLowerCase());
 
 exports.uploadUsers=(req,res) => {
-	test(req.file.filename);
+	// test(req.file.filename);
 	res.send({"success": "users uploaded"})
 }
