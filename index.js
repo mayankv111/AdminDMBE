@@ -12,6 +12,7 @@ const propController=require("./plotController");
 const userUploader=require("./userUpload");
 const aptUploader = require("./apartmentUpload");
 const mapUploader = require("./mapInfoUpload");
+const sectorMapLoader = require("./sectorMapUpload");
 
 const fileStorageEngine=multer.diskStorage({
 	destination: (req,file,cb) => {
@@ -31,7 +32,7 @@ app.put("/api/update-properties",upload.single('file'),propController.updateProp
 app.post("/api/upload-users",upload.single('file'),userUploader.uploadUsers);
 app.put("/api/upload-apt",upload.single('file') , aptUploader.aptUpload);
 app.put("/api/map-info", upload.single('file') , mapUploader.updateMap);
-
+app.post("/api/sector-map", upload.single('file') , sectorMapLoader.uploadSectorMaps );
 
 // app.get("/download-sample",controllers.downloadSample );
 

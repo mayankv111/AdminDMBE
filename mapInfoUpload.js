@@ -10,27 +10,31 @@ const collection1=model.collection("properties");
 const collection2 = model.collection("maps");
 const collection3 = model.collection("temp_missingProperties");
 const rows=[]
-async function findAndUpdateProperty(plotNo , sectorNo ,updates){
-	updates = updates.slice(2);
-	let res = await collection1.findOne({ plotNumber : plotNo , sectorNumber : sectorNo});
+async function findAndUpdateProperty(plotNo , sectorNo ,size,	roadWidth,	parkFacing	,cornerPlot	,direction	){
+	let res = await collection1.findOne({ category :"PLOT", plotNumber : plotNo , sectorNumber : sectorNo});
 	if(res === null) {
-		let resmiss = await collection3.insertOne({
+		let resmiss = await collection3.insertOne(		{
+			category :"PLOT",
 			plotNumber : plotNo , 
 			sectorNumber : sectorNo,
 		})
-		console.log(resmiss);
+		await updatePropertyMap(resmiss._id , size,	roadWidth,	parkFacing	,cornerPlot	,direction	);
 	}
 	else{
-	await updatePropertyMap(res._id , updates);
+	await updatePropertyMap(res._id , size,	roadWidth,	parkFacing	,cornerPlot	,direction	);
 	}
 }
 
-async function updatePropertyMap(propid, updates) {
+async function updatePropertyMap(propid, size,	roadWidth,	parkFacing	,cornerPlot	,direction	) {
 	let res = await collection2.findOne({propertyID: ObjectId(propid)});
 	if(res === null)
 	{
 		let res1 =await collection2.insertOne({
-			updates,
+			size : size,
+			roadWidth : roadWidth,
+			parkFacing : parkFacing,
+			cornerPlot : cornerPlot,
+			direction : direction,
 			propertyID: ObjectId(propid), 
 			});
 		console.log(res1);
@@ -47,7 +51,8 @@ async function test(filename) {
 		rows.push(row)
 	}).on("end",async function() {
 		for(let i=0;i<rows.length;i++) {
-			await findAndUpdateProperty(rows[i].Plot_Number, rows[i]);
+			await findAndUpdateProperty(rows[i].Plot_Number,rows[i].sectorNo, rows[i].size	, rows[i].roadWidth	, rows[i].parkFacing,  rows[i].cornerPlot,  rows[i].direction
+				);
 		}
 		process.exit()
 	}).on("error",(error) => console.error(error))
