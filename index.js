@@ -11,6 +11,7 @@ const controllers=require("./controllers");
 const propController=require("./plotController");
 const userUploader=require("./userUpload");
 const aptUploader = require("./apartmentUpload");
+const mapUploader = require("./mapInfoUpload");
 
 const fileStorageEngine=multer.diskStorage({
 	destination: (req,file,cb) => {
@@ -29,6 +30,8 @@ app.delete("/api/delete-data",upload.single('file'),controllers.deleteData);
 app.put("/api/update-properties",upload.single('file'),propController.updateProp)
 app.post("/api/upload-users",upload.single('file'),userUploader.uploadUsers);
 app.put("/api/upload-apt",upload.single('file') , aptUploader.aptUpload);
+app.put("/api/map-info", upload.single('file') , mapUploader.updateMap);
+
 
 // app.get("/download-sample",controllers.downloadSample );
 
