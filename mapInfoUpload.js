@@ -42,7 +42,14 @@ async function updatePropertyMap(propid, size,	roadWidth,	parkFacing	,cornerPlot
 	else {
 		await collection2.updateOne(
 		{propertyID: ObjectId(propid)},
-		{ $set : updates	});
+		{ $set : 
+			{
+			size : size,
+			roadWidth : roadWidth,
+			parkFacing : parkFacing,
+			cornerPlot : cornerPlot,
+			direction : direction,
+		}	});
 	}
 }
 

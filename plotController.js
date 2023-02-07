@@ -8,16 +8,17 @@ const model=client.db("model");
 
 const collection1=model.collection("properties");
 const collection2 = model.collection("authority");
-const collection3 = model.collection("temp_missingProperties");
+// const collection3 = model.collection("temp_missingProperties");
 const rows=[]
 async function findAndUpdateProperty(plotNo , sectorNo , oname, mobile){
 	let res = await collection1.findOne({ plotNumber : plotNo , sectorNumber : sectorNo});
 	if(res === null) {
-		let resmiss = await collection3.insertOne({
+		let resmiss = await collection1.insertOne({
 			plotNumber : plotNo , 
 			sectorNumber : sectorNo,
 		})
 		console.log(resmiss);
+		await updatePropertyAuth(resmiss._id , oname, mobile);
 	}
 	else{
 	await updatePropertyAuth(res._id , oname, mobile);
