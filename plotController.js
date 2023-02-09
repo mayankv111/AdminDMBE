@@ -45,17 +45,17 @@ async function updatePropertyAuth(propid, oname, mobile) {
 	}
 	else {
 		console.log(res.ownerName);
-		// if(res.ownerName !== "" || res.phoneNumber !== "")
-		// {
-		// 	let res2 = await collection2.updateOne(
-		// 	{propertyID: ObjectId(propid)},
-		// 	{ $set :{
-		// 		ownerName : oname , 
-		// 		phoneNumber : mobile ,  
-		// 		}
-		// 	});
-		// 	console.log(res2);
-		// }
+		if(res.ownerName !== "" || res.phoneNumber !== "")
+		{
+		 	let res2 = await collection2.updateOne(
+		 	{propertyID: ObjectId(propid)},
+		 	{ $set :{
+		 		ownerName : oname , 
+		 		phoneNumber : mobile ,  
+		 		}
+		 	});
+		 	console.log(res2);
+		 }
 	}
 }
 
