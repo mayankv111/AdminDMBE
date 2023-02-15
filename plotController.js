@@ -124,6 +124,8 @@ async function test(filename) {
 	}).on("end",async function() {
 		for(let i=0;i< rows.length;i++) {
 			await findAndUpdateProperty(rows[i].Plot_Number,rows[i].Sector,rows[i].OWNER_NAME,rows[i].MOBILE);
+		for(let i=0;i<rows.length;i++) {
+			await findAndUpdateProperty(rows[i].Plot_Number, rows[i].Sector,rows[i].OWNER_NAME,rows[i].MOBILE,rows[i].Category);
 		}
 		process.exit()
 	}).on("error",(error) => console.error(error))
@@ -135,3 +137,4 @@ async function test(filename) {
 // }
 
 test("auth_update.csv");
+
