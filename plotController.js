@@ -124,8 +124,8 @@ async function test(filename) {
 	}).on("end",async function() {
 		for(let i=0;i< rows.length;i++) {
 			await findAndUpdateProperty(rows[i].Plot_Number,rows[i].Sector,rows[i].OWNER_NAME,rows[i].MOBILE);
-		process.exit()
 		}
+		process.exit()
 	}).on("error",(error) => console.error(error))
 }
 
