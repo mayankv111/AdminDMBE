@@ -8,17 +8,17 @@ const model=client.db("model");
 
 const collection1=model.collection("properties");
 const collection2 = model.collection("maps");
-const collection3 = model.collection("temp_missingProperties");
 const rows=[]
-async function findAndUpdateProperty(plotNo , sectorNo ,size,	roadWidth,	parkFacing	,cornerPlot	,direction	){
+async function findAndUpdateProperty(plotNo , sectorNo ,size,	roadWidth,	parkFacing	,cornerPlot	,direction, seqNo	){
 	let res = await collection1.findOne({ category :"PLOT", plotNumber : plotNo , sectorNumber : sectorNo});
 	if(res === null) {
-		let resmiss = await collection3.insertOne(		{
+		let resmiss = await collection1.insertOne(		{
 			category :"PLOT",
 			plotNumber : plotNo , 
 			sectorNumber : sectorNo,
+			sequenceNumber : seqNo
 		})
-		await updatePropertyMap(resmiss._id , size,	roadWidth,	parkFacing	,cornerPlot	,direction	);
+		await updatePropertyMap(resmiss.insertedId , size,	roadWidth,	parkFacing	,cornerPlot	,direction	);
 	}
 	else{
 	await updatePropertyMap(res._id , size,	roadWidth,	parkFacing	,cornerPlot	,direction	);
@@ -41,7 +41,7 @@ async function updatePropertyMap(propid, size,	roadWidth,	parkFacing	,cornerPlot
 	}
 	else {
 		await collection2.updateOne(
-		{propertyID: ObjectId(propid)},
+		{ _id :  res._id},
 		{ $set : 
 			{
 			size : size,
@@ -58,14 +58,15 @@ async function test(filename) {
 		rows.push(row)
 	}).on("end",async function() {
 		for(let i=0;i<rows.length;i++) {
-			await findAndUpdateProperty(rows[i].Plot_Number,rows[i].sectorNo, rows[i].size	, rows[i].roadWidth	, rows[i].parkFacing,  rows[i].cornerPlot,  rows[i].direction
-				);
+			await findAndUpdateProperty(rows[i].Plot_Number,rows[i].sectorNo, rows[i].size	, rows[i].roadWidth	, rows[i].parkFacing,  rows[i].cornerPlot,  rows[i].direction , rows[i].seqNo);
 		}
 		process.exit()
 	}).on("error",(error) => console.error(error))
 }
 
-exports.updateMap = (req,res) =>{
-	test(req.file.filename);
-	res.json({ "success" : "data updated"});
-}
+// exports.updateMap = (req,res) =>{
+// 	test(req.file.filename);
+// 	res.json({ "success" : "data updated"});
+// }
+
+test("");
