@@ -129,10 +129,10 @@ async function test(filename) {
 	}).on("error",(error) => console.error(error))
 }
 
-// exports.updateProp = (req,res) =>{
-// 	test(req.file.filename);
-// 	res.json({ "success" : "data updated"});
-// }
+exports.updateProp = (req,res) =>{
+	test(req.file.filename);
+	res.json({ "success" : "data updated"});
+}
 
-test("merge.csv");
+// test("merge.csv");
 
